@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sky Team Helper Board</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <div class="board-stage">
+        <section class="board" aria-label="Sky Team helper board">
+          <button class="hotspot tile blue tower-left" data-operation="tower" aria-label="Contact control tower"></button>
+          <button class="hotspot tile orange tower-right-top" data-operation="tower" aria-label="Contact control tower"></button>
+          <button class="hotspot tile orange tower-right-lower" data-operation="tower" aria-label="Contact control tower"></button>
+
+          <button class="hotspot tile blue gear-one" data-operation="gear" data-step="1" aria-label="Put down landing gear 1"></button>
+          <button class="hotspot tile blue gear-two" data-operation="gear" data-step="2" aria-label="Put down landing gear 2"></button>
+          <button class="hotspot tile blue gear-three" data-operation="gear" data-step="3" aria-label="Put down landing gear 3"></button>
+
+          <button class="hotspot tile orange flap-one" data-operation="flaps" data-step="1" aria-label="Extend wing flaps 1"></button>
+          <button class="hotspot tile orange flap-two" data-operation="flaps" data-step="2" aria-label="Extend wing flaps 2"></button>
+          <button class="hotspot tile orange flap-three" data-operation="flaps" data-step="3" aria-label="Extend wing flaps 3"></button>
+          <button class="hotspot tile orange flap-four" data-operation="flaps" data-step="4" aria-label="Extend wing flaps 4"></button>
+          <button class="hotspot tile orange flap-five" data-operation="flaps" data-step="5" aria-label="Extend wing flaps 5"></button>
+
+          <button class="hotspot attitude-dial" data-operation="axis" aria-label="Set axis">
+            <span class="sky"></span>
+            <span class="ground"></span>
+            <span class="horizon"></span>
+            <span class="center-line"></span>
+          </button>
+
+          <svg class="arc arc-large" viewBox="0 0 240 126" aria-hidden="false">
+            <path class="svg-hotspot" data-operation="thrust" data-thrust-max="12" role="button" tabindex="0" aria-label="Set thrust" d="M15 0 V12 C15 73 61 111 120 111 C179 111 225 73 225 12 V0"></path>
+          </svg>
+          <svg class="arc arc-small" viewBox="0 0 120 60" aria-hidden="false">
+            <path class="svg-hotspot" data-operation="thrust" data-thrust-max="6" role="button" tabindex="0" aria-label="Set touchdown thrust" d="M0 12 C31 42 89 42 120 12"></path>
+          </svg>
+
+          <button class="hotspot tile blue brake-one" data-operation="brakes" data-step="1" aria-label="Activate brake 1"></button>
+          <button class="hotspot tile blue brake-two" data-operation="brakes" data-step="2" aria-label="Activate brake 2"></button>
+          <button class="hotspot tile blue brake-three" data-operation="brakes" data-step="3" aria-label="Activate brake 3"></button>
+
+          <button class="hotspot coffee-key coffee-one" data-operation="coffee" aria-label="Request coffee"></button>
+          <button class="hotspot coffee-key coffee-two" data-operation="coffee" aria-label="Request coffee"></button>
+          <button class="hotspot coffee-key coffee-three" data-operation="coffee" aria-label="Request coffee"></button>
+        </section>
+      </div>
+
+      <footer class="level-control" aria-label="Helper level">
+        <div class="slider-wrap">
+          <input id="levelSlider" type="range" min="0" max="2" step="1" value="0" aria-label="Helper level">
+          <div class="level-ticks" aria-hidden="true">
+            <span>Trainee</span>
+            <span>Junior</span>
+            <span>Senior</span>
+          </div>
+        </div>
+        <strong id="levelName">Trainee</strong>
+      </footer>
+    </main>
+
+    <dialog class="helper-modal" id="helperModal" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <button class="close-button" type="button" id="closeModal" aria-label="Close helper">x</button>
+        <p class="modal-level" id="modalLevel" hidden></p>
+        <h1 id="modalTitle">Operation</h1>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
