@@ -158,11 +158,6 @@ input {
   grid-row: 7;
 }
 
-.flap-five {
-  grid-column: 6;
-  grid-row: 8;
-}
-
 .brake-one {
   grid-column: 2;
   grid-row: 8;

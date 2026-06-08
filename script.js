@@ -44,7 +44,7 @@ const operations = {
     title: "Extend wing flaps",
     keywords: ["flaps", "extend", "require", "thrust", "maintain"],
     lines: [
-      line("flaps-extending", [k("Extending", "extend"), " ", k("flaps", "flaps"), " 1/2/3/4/5."], "putting die"),
+      line("flaps-extending", [k("Extending", "extend"), " ", k("flaps", "flaps"), " 1/2/3/4."], "putting die"),
       line("flaps-extended", [k("Flaps", "flaps"), " ", k("extended", "extend"), "."], "green light on"),
       line("flaps-thrust", [k("Require", "require"), " higher ", k("thrust", "thrust"), " to ", k("maintain", "maintain"), " speed."], "move orange thrust marker")
     ]
@@ -75,7 +75,7 @@ const operations = {
     title: "Set thrust",
     keywords: ["adjust", "engine", "power", "thrust", "increase", "reduce", "set"],
     intro: line("thrust-adjust", [k("Adjusting", "adjust"), " ", k("engine", "engine"), " ", k("power", "power"), "."], "putting first die"),
-    toLine: line("thrust-to", [k("Increase", "increase"), "/", k("Reduce", "reduce"), "/Set ", k("thrust", "thrust"), " to 2-12."], "putting second die"),
+    toLine: line("thrust-to", [k("Increase", "increase"), "/set or ", k("Reduce", "reduce"), "/set ", k("thrust", "thrust"), " to 2-12."], "putting second die"),
     byLine: line("thrust-by", [k("Increase", "increase"), "/", k("Reduce", "reduce"), " ", k("thrust", "thrust"), " by 1-10."], "putting second die"),
     confirm: line("thrust-confirmed", [k("Thrust", "thrust"), " confirmed."], "moving the distance gauge")
   },
@@ -89,10 +89,10 @@ const operations = {
   },
   coffee: {
     title: "Request coffee",
-    keywords: ["request", "coffee", "cabin", "crew"],
+    keywords: ["request", "receive", "cabin", "crew"],
     lines: [
-      line("coffee-request", [k("Requesting", "request"), " ", k("coffee", "coffee"), " from ", k("cabin", "cabin"), " ", k("crew", "crew"), "."], "putting die"),
-      line("coffee-received", [k("Coffee", "coffee"), " received."], "adding coffee token")
+      line("coffee-request", [k("Requesting", "request"), " coffee from ", k("cabin", "cabin"), " ", k("crew", "crew"), "."], "putting die"),
+      line("coffee-received", ["Coffee ", k("received", "receive"), "."], "adding coffee token")
     ]
   }
 };
@@ -365,8 +365,15 @@ function thrustResult() {
 }
 
 function makeThrustToLine(result, practice = false) {
+  if (result.direction === "set") {
+    return {
+      ...line("thrust-to-dynamic", [k("Set", "set"), " ", k("thrust", "thrust"), ` to ${activeCurrentThrust}.`], "putting second die"),
+      practice
+    };
+  }
+
   return {
-    ...line("thrust-to-dynamic", [k(result.verb, result.key), " ", k("thrust", "thrust"), ` to ${activeCurrentThrust}.`], "putting second die"),
+    ...line("thrust-to-dynamic", [k(result.verb, result.key), "/", k("set", "set"), " ", k("thrust", "thrust"), ` to ${activeCurrentThrust}.`], "putting second die"),
     practice
   };
 }
@@ -483,7 +490,7 @@ function renderOperationLines(operationKey, operation) {
 
   if (operationKey === "flaps") {
     return [
-      line("flaps-extending", [k("Extending", "extend"), " ", k("flaps", "flaps"), ` ${activeStep || "1/2/3/4/5"}.`], "putting die"),
+      line("flaps-extending", [k("Extending", "extend"), " ", k("flaps", "flaps"), ` ${activeStep || "1/2/3/4"}.`], "putting die"),
       operation.lines[1],
       operation.lines[2]
     ];
